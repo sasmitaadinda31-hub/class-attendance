@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Attendance | Absensi Kelas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">A</div><div><strong>Attendly</strong><small>CLASS MANAGEMENT</small></div></div>
+      <div class="nav-label">MENU UTAMA</div>
+      <nav>
+        <button class="nav-item active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-page="attendance"><span>☑</span> Absensi</button>
+        <button class="nav-item" data-page="students"><span>♙</span> Data & Riwayat</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="mini-avatar">12</div><div><strong>Kelas XII RPL</strong><small>Semester Genap</small></div></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="mobile-brand"><div class="brand-mark">A</div><strong>Attendly</strong></div><div class="crumb">Workspace <span>/</span> <b id="crumbTitle">Dashboard</b></div><div class="top-actions"><span class="today-pill" id="todayLabel"></span><button class="icon-btn" id="themeToggle" title="Toggle tema">◐</button></div></header>
+      <section class="page active" id="dashboardPage">
+        <div class="welcome-row"><div><p class="eyebrow">CLASS OVERVIEW</p><h1>Selamat pagi! 👋</h1><p class="subtext">Pantau kehadiran kelas hari ini dengan mudah.</p></div><button class="primary-btn" data-goto="attendance">+ Isi Absensi</button></div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-top"><span>Total Siswa</span><span class="stat-icon purple">♙</span></div><h2 id="totalStat">0</h2><small>Terdaftar di kelas</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Hadir Hari Ini</span><span class="stat-icon green">✓</span></div><h2 id="presentStat">0</h2><small class="green-text">Siswa hadir</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Izin / Sakit</span><span class="stat-icon orange">✚</span></div><h2 id="excuseStat">0</h2><small>Perlu keterangan</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Belum Absen</span><span class="stat-icon blue">◷</span></div><h2 id="pendingStat">0</h2><small>Belum ada status</small></div>
+        </div>
+        <div class="content-grid"><div class="panel attendance-panel"><div class="panel-heading"><div><h3>Ringkasan Kehadiran</h3><p>Status absensi hari ini</p></div><span class="date-chip" id="dateChip"></span></div><div class="attendance-summary"><div class="donut" id="donut"><div class="donut-inner"><strong id="presentPercent">0%</strong><small>Hadir</small></div></div><div class="legend"><div><i class="dot present"></i>Hadir <b id="legendPresent">0</b></div><div><i class="dot sick"></i>Sakit <b id="legendSick">0</b></div><div><i class="dot permit"></i>Izin <b id="legendPermit">0</b></div><div><i class="dot absent"></i>Alfa <b id="legendAbsent">0</b></div></div></div></div>
+          <div class="panel quick-panel"><div class="panel-heading"><div><h3>Quick Actions</h3><p>Akses fitur cepat</p></div></div><button class="quick-action" data-goto="attendance"><span class="quick-icon purple">☑</span><div><b>Mulai Absensi</b><small>Catat kehadiran siswa</small></div><span class="arrow">›</span></button><button class="quick-action" data-goto="students"><span class="quick-icon blue">♙</span><div><b>Data Siswa</b><small>Kelola daftar siswa</small></div><span class="arrow">›</span></button></div></div>
+        <div class="panel table-panel"><div class="panel-heading"><div><h3>Daftar Siswa</h3><p>Preview data siswa di kelas</p></div><button class="text-btn" data-goto="students">Lihat semua →</button></div><div class="table-wrap"><table><thead><tr><th>Nama Siswa</th><th>Status Hari Ini</th></tr></thead><tbody id="dashboardStudents"></tbody></table></div></div>
+      </section>
+      <section class="page" id="attendancePage"><div class="page-heading"><p class="eyebrow">DAILY RECORD</p><h1>Absensi Kelas</h1><p class="subtext">Pilih status kehadiran setiap siswa untuk hari ini.</p></div><div class="panel attendance-form-panel"><div class="panel-heading"><div><h3>Daftar Kehadiran</h3><p id="attendanceDate"></p></div><button class="secondary-btn" id="resetAttendance">Reset status</button></div><div class="table-wrap"><table><thead><tr><th>No.</th><th>Nama Siswa</th><th>Status</th></tr></thead><tbody id="attendanceRows"></tbody></table></div><div class="save-row"><span id="saveMessage">Status tersimpan otomatis di browser.</span><button class="primary-btn" id="saveAttendance">Simpan Absensi</button></div></div></section>
+      <section class="page" id="studentsPage"><div class="page-heading"><p class="eyebrow">STUDENT DIRECTORY</p><h1>Data & Riwayat</h1><p class="subtext">Kelola siswa dan lihat catatan absensi yang tersimpan.</p></div><div class="panel student-tools"><div class="search-box"><span>⌕</span><input type="search" id="searchStudent" placeholder="Cari nama siswa..."></div><form id="addStudentForm" class="add-form"><input id="newStudentName" type="text" placeholder="Nama siswa baru" maxlength="60" required><button class="primary-btn" type="submit">+ Tambah Siswa</button></form></div><div class="panel table-panel"><div class="panel-heading"><div><h3>Daftar Siswa</h3><p id="studentCountText">-</p></div></div><div class="table-wrap"><table><thead><tr><th>No.</th><th>Nama Siswa</th><th>Status Hari Ini</th><th>Action</th></tr></thead><tbody id="studentRows"></tbody></table></div></div><div class="panel history-panel"><div class="panel-heading"><div><h3>Riwayat Absensi</h3><p>Rekap tanggal yang pernah disimpan</p></div><button class="secondary-btn" id="clearHistory">Hapus Riwayat</button></div><div id="historyList" class="history-list"></div></div></section>
+      <footer>Attendly <span>•</span> Absensi Kelas sederhana · Data tersimpan di browser ini</footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
